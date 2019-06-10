@@ -1,0 +1,36 @@
+﻿@model BrunoSilvaLibrary.Models.UserModel
+
+@{
+    ViewBag.Title = "Register";
+}
+@using (Html.BeginForm("Register", "Home", FormMethod.Post))
+{
+    <fieldset>
+        <legend>Register page</legend>
+
+        <table>
+            <tr>
+                <td>@Html.LabelFor(a => a.UserName)</td>
+                <td>@Html.TextBoxFor(a => a.UserName)</td>
+                <td>@Html.ValidationMessageFor(a => a.UserName)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(a => a.UserEmail)</td>
+                <td>@Html.TextBoxFor(a => a.UserEmail)</td>
+                <td>@Html.ValidationMessageFor(a => a.UserEmail)</td>
+            </tr>
+            <tr>
+                <td>@Html.LabelFor(a => a.Password)</td>
+                <td>@Html.PasswordFor(a => a.Password)</td>
+                <td>@Html.ValidationMessageFor(a => a.Password)</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="submit" value="Register" />
+                </td>
+                <td></td>
+            </tr>
+        </table>
+    </fieldset>
+}

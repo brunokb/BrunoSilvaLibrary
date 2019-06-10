@@ -1,0 +1,39 @@
+﻿@model BrunoSilvaLibrary.UserDataSet
+
+@{
+    ViewBag.Title = "UserDashBoard";
+}
+
+<fieldset>
+    <legend> User DashBoard </legend>
+
+    @if (Session["UserName"] != null)
+    {
+    <form action="/Home/Login">
+        <table>
+            <tr>
+                <td>ID:</td>
+                <td><input type="text" name="UID" value="@Session["UserID"].ToString()" readonly></td>
+            </tr>
+            <tr>
+                <td>UserLevel:</td>
+                <td><input type="text" name="UserLevel" value="@Session["UserLevel"].ToString()" readonly></td>
+            </tr>
+            <tr>
+                <td>Username:</td>
+                <td><input type="text" name="UserName" value="@Session["UserName"].ToString()" readonly></td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td><input type="password" name="password" value="@Session["Password"].ToString()"></td>
+            </tr>
+            <tr>
+                <td>E-mail:</td>
+                <td><input type="text" name="email" value="@Session["Email"].ToString()"></td>
+            </tr>
+        </table>
+            <input type="submit" value="Update user">
+
+    </form>
+            }
+    </fieldset>
