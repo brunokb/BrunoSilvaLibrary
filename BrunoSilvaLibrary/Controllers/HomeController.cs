@@ -34,7 +34,7 @@ namespace BrunoSilvaLibrary.Controllers
             if (ModelState.IsValid)
             {
                 UserDataImp tLib = new UserDataImp();
-                tLib.CreateUser(objUser.UserName,objUser.Password, objUser.UserEmail);
+                tLib.CreateUser(objUser.UserName, objUser.Password, objUser.UserEmail);
             }
             return View();
         }
@@ -47,7 +47,6 @@ namespace BrunoSilvaLibrary.Controllers
             {
                 UserDataImp tLib = new UserDataImp();
                 UserModel dbUser = tLib.ValidPassword(objUser.UserName, objUser.Password);
-                //tLib.CreateUser("test", "123321", "teste@teste");
                 //tLib.UpdateUser("test","123456","teste@tt",1);
                 //tLib.DeleteUser("test");
                 if (dbUser != null)
@@ -63,6 +62,12 @@ namespace BrunoSilvaLibrary.Controllers
             return View(objUser);
         }
 
+        public ActionResult Logout()
+        {
+            Session.Clear();
+            return RedirectToAction("Login");
+        }
+
         public ActionResult UserDashBoard()
         {
             if (Session["UserID"] != null)
@@ -75,20 +80,63 @@ namespace BrunoSilvaLibrary.Controllers
             }
         }
         [HttpGet]
-        public ActionResult Media(string titleS, string genreS, string directorS)
+        public ActionResult Media(string command, string MID, string titleS, string genreS, string directorS, string language, string publishYear, string budget)
+        {
+            int iMID;
+            if (Session["UserID"] == null) { return RedirectToAction("Login"); }
+                MediaDataImp mediaDB = new MediaDataImp();
+            if (command == "UPDATE" && MID != null)
+            {
+                Int32.TryParse(MID, out iMID);
+                mediaDB.UpdateMedia(iMID, titleS, genreS, directorS, language, publishYear, budget);
+            }
+            else if (command == "DELETE" && MID != null)
+            {
+                Int32.TryParse(MID, out iMID);
+                mediaDB.DeleteMedia(iMID);
+            }
+            else if (command == "SEARCH")
+            {
+                if (titleS == "") { titleS = null; }
+                if (genreS == "") { genreS = null; }
+                if (directorS == "") { directorS = null; }
+                ViewBag.mediaList = this.MediasFromDB(titleS, genreS, directorS);
+                return View();
+            }
+            else if (command == "CREATE")
+            {
+                mediaDB.CreateMedia(titleS, genreS, directorS, language, publishYear, budget);
+            }
+            ViewBag.mediaList = this.MediasFromDB(null, null, null);
+            return View();
+        }
+        private List<Media> MediasFromDB(string titleS, string genreS, string directorS)
         {
             MediaDataImp mediaDB = new MediaDataImp();
             List<Media> mediaResult = mediaDB.GetMedias(titleS, genreS, directorS);
-
-            UserDataSetTableAdapters.TableMediaTableAdapter sda = new UserDataSetTableAdapters.TableMediaTableAdapter();
-            UserDataSet.TableMediaDataTable ds = new UserDataSet.TableMediaDataTable();
-            if(string.IsNullOrEmpty(titleS) && string.IsNullOrEmpty(genreS) && string.IsNullOrEmpty(directorS)) sda.Fill(ds);
-            else if (titleS == "" && directorS == "" && !string.IsNullOrEmpty(genreS)) sda.FillByGenre(ds, genreS);
-            else if (genreS == "" && directorS == "" && !string.IsNullOrEmpty(titleS)) sda.FillByTitle(ds, titleS);
-            else if (genreS == "" && titleS == "" && !string.IsNullOrEmpty(directorS)) sda.FillByDirector(ds, directorS);
-            else sda.FillByGenreAndTitle(ds, titleS, genreS);
-            Media me = new Media();
-            return View(me.ConvertToMediaList(ds));
+            return mediaResult;
         }
+
+        //------ USER LIST ------
+        public ActionResult UserList(string command)
+        {
+            if (command == "UPDATE")
+            {
+            }
+            else if (command == "DELETE")
+            {
+            }
+            ViewBag.userList = this.UsersFromDB();
+            return View();
+        }
+        private List<UserModel> UsersFromDB()
+        {
+            UserDataImp userDB = new UserDataImp();
+            List<UserModel> userResult = userDB.GetUserList();
+            return userResult;
+        }
+
+
+
     }
 }

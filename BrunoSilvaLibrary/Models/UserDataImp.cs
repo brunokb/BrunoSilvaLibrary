@@ -52,6 +52,46 @@ namespace BrunoSilvaLibrary.Models
             }
             return validUser;
         }
+
+        public List<UserModel> GetUserList()
+        {
+            List<UserModel> listUsers = new List<UserModel>();
+            string conString = "Data Source = SQL5020.site4now.net; Initial Catalog = DB_9AB8B7_B19ES6931; User ID = DB_9AB8B7_B19ES6931_admin; Password=z9jjQg9H";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+
+                    connection.Open();
+                    SqlCommand selectCommand = connection.CreateCommand();
+                    selectCommand.CommandText = "SELECT UID, UserEmail, UserLevel, UserName FROM dbo.TabUser";
+                    SqlDataReader reader = selectCommand.ExecuteReader();
+                    if (reader.HasRows)
+                    {
+                        while (reader.Read())
+                        {
+                            UserModel validUser = new UserModel();
+                            validUser.UID = reader.GetInt32(0);
+                            validUser.UserEmail = reader.GetString(1);
+                            validUser.UserLevel = reader.GetInt32(2);
+                            validUser.UserName = reader.GetString(3);
+                            listUsers.Add(validUser);
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("No rows found.");
+                    }
+                    reader.Close();
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return listUsers;
+        }
         public bool CreateUser(string username, string password, string email)
         {
             string conString = "Data Source = SQL5020.site4now.net; Initial Catalog = DB_9AB8B7_B19ES6931; User ID = DB_9AB8B7_B19ES6931_admin; Password=z9jjQg9H";

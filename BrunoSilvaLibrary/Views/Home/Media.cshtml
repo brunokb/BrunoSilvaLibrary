@@ -2,39 +2,105 @@
 
 @{
     ViewBag.Title = "Media";
-    WebGrid grid = new WebGrid(Model);
+    WebGrid grid = new WebGrid(source: @ViewBag.mediaList, canSort: true, rowsPerPage: 15);
+    WebGrid gridCreate = new WebGrid();
+
 }
 <h2>Media Browsing</h2>
 <br />
 @using (Html.BeginForm("Media", "Home", FormMethod.Get))
 {
-<table>
-    <tr>
-        <td>Title: </td>
-        <td>@Html.TextBox("titleS")</td>
-    </tr>
-    <tr>
-        <td>Genre: </td>
-        <td>@Html.TextBox("genreS")</td>
-    </tr>
-    <tr>
-        <td>Director: </td>
-        <td>@Html.TextBox("directorS")</td>
-    </tr>
-    <tr>
-        <td colspan="2"><input type="submit" value="Submit"></td>
-    </tr>
-</table>
+    <table>
+        <tr>
+            <td>Title: </td>
+            <td>@Html.TextBox("titleS")</td>
+        </tr>
+        <tr>
+            <td>Genre: </td>
+            <td>@Html.TextBox("genreS")</td>
+        </tr>
+        <tr>
+            <td>Director: </td>
+            <td>@Html.TextBox("directorS")</td>
+        </tr>
+        <tr>
+            @Html.TextBox("command", "SEARCH", new { @class = "hidden" })
+            <td colspan="1"><input type="submit" value="Search"></td>
+        </tr>
+    </table>
 }
-<td>
-    <br />
-    @grid.GetHtml(columns: new[]
+
+    @if (string.Compare(@HttpContext.Current.Session["UserLevel"].ToString(), "3") == 0)
+    {
+        <td>
+            <br />
+            @grid.GetHtml(tableStyle: "table table-bordered", mode: WebGridPagerModes.All, firstText:"<<First", previousText:"<Prev",
+            nextText:"Next >", lastText:"Last >>",
+            columns: grid.Columns(
+                    grid.Column("MID"),
+                    grid.Column("Title"),
+                    grid.Column("Language"),
+                    grid.Column("Director"),
+                    grid.Column("Genre"),
+                    grid.Column("Budget"),
+                    grid.Column(header:"Update", format:
+                                                        @<text>
+                                                            @Html.ActionLink(linkText: "Update", actionName: "Media", routeValues: new { command = "UPDATE", MID = @item.MID })
+                                                            @Html.ActionLink(linkText: "Delete", actionName: "Media", routeValues: new { command = "DELETE", MID = @item.MID })
+                                                        </text>
+                                                                                                                              )
+                                                                                                                              ))
+        </td>
+        <h1>Insert Media</h1>
+        using (Html.BeginForm("Media", "Home", FormMethod.Get))
         {
-            grid.Column("Title"),
-            grid.Column("Language"),
-            grid.Column("Director"),
-            grid.Column("Genre"),
-            grid.Column("Budget")
+            <table>
+                <tr>
+                    <td>Title: </td>
+                    <td>@Html.TextBox("titleS")</td>
+                </tr>
+                <tr>
+                    <td>Genre: </td>
+                    <td>@Html.TextBox("genreS")</td>
+                </tr>
+                <tr>
+                    <td>Director: </td>
+                    <td>@Html.TextBox("directorS")</td>
+                </tr>
+                <tr>
+                    <td>Language: </td>
+                    <td>@Html.TextBox("language")</td>
+                </tr>
+                <tr>
+                    <td>Publish Year: </td>
+                    <td>@Html.TextBox("publishYear")</td>
+                </tr>
+                <tr>
+                    <td>Budget: </td>
+                    <td>@Html.TextBox("budget")</td>
+                </tr>
+                <tr>
+                    @Html.TextBox("command", "CREATE", new { @class = "hidden" })
+                    <td colspan="1"><input type="submit" value="Insert"></td>
+                </tr>
+            </table>
         }
 
-    )
+    }
+
+    @if (string.Compare(@HttpContext.Current.Session["UserLevel"].ToString(), "1") == 0)
+    {
+        <td>
+            <br />
+            @grid.GetHtml(tableStyle: "table table-bordered", mode: WebGridPagerModes.All, firstText:"<<First", previousText:"<Prev",
+            nextText:"Next >", lastText:"Last >>",
+            columns: grid.Columns(
+                    grid.Column("MID"),
+                    grid.Column("Title"),
+                    grid.Column("Language"),
+                    grid.Column("Director"),
+                    grid.Column("Genre"),
+                    grid.Column("Budget")))
+        </td>
+
+    }

@@ -23,7 +23,22 @@
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
                     <li>@Html.ActionLink("Media", "Media", "Home")</li>
-                    <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    @if (@HttpContext.Current.Session["UserLevel"] != null)
+                    {
+                        if (string.Compare(@HttpContext.Current.Session["UserLevel"].ToString(), "3") == 0)
+                        {
+                            <li>@Html.ActionLink("User List", "UserList", "Home")</li>
+                        }
+                        <li>@Html.ActionLink(@HttpContext.Current.Session["Username"].ToString(), "UserDashBoard", "Home")</li>
+                        <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
+                    }
+                    @if (@HttpContext.Current.Session["UserLevel"] == null)
+                    {
+                        <li>@Html.ActionLink("Register", "Register", "Home")</li>
+                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                    }
                 </ul>
             </div>
         </div>
