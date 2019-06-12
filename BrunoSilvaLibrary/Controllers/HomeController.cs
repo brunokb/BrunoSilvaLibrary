@@ -118,13 +118,16 @@ namespace BrunoSilvaLibrary.Controllers
         }
 
         //------ USER LIST ------
-        public ActionResult UserList(string command)
+        public ActionResult UserList(string command, string UID)
         {
             if (command == "UPDATE")
             {
             }
             else if (command == "DELETE")
             {
+                UserDataImp tLib = new UserDataImp();
+                tLib.DeleteUser(UID);
+
             }
             ViewBag.userList = this.UsersFromDB();
             return View();

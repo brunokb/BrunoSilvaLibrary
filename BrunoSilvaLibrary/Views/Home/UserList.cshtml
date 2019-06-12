@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "User List";
+    WebGrid grid = new WebGrid(source: @ViewBag.userList, canSort: true, rowsPerPage: 15);
+}
+
+@grid.GetHtml(tableStyle: "table table-bordered", mode: WebGridPagerModes.All, firstText:"<<First", previousText:"<Prev",
+nextText:"Next >", lastText:"Last >>",
+columns: grid.Columns(
+        grid.Column("UID"),
+        grid.Column("UserName"),
+        grid.Column("UserLevel"),
+        grid.Column(header:"Update", format:
+                                                @<text>
+                                                    @Html.ActionLink(linkText: "Update", actionName: "UserList", routeValues: new { command = "UPDATE", UID = @item.UID })
+                                                    @Html.ActionLink(linkText: "Delete", actionName: "UserList", routeValues: new { command = "DELETE", UID = @item.UID })
+                                                </text>
+                                                                                                                       )
+                                                                                                                       ))

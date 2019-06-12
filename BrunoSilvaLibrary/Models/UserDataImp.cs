@@ -136,7 +136,7 @@ namespace BrunoSilvaLibrary.Models
                 return false;
             }
         }
-        public bool DeleteUser(string username)
+        public bool DeleteUser(string UID)
         {
             string conString = "Data Source = SQL5020.site4now.net; Initial Catalog = DB_9AB8B7_B19ES6931; User ID = DB_9AB8B7_B19ES6931_admin; Password=z9jjQg9H";
 
@@ -147,7 +147,7 @@ namespace BrunoSilvaLibrary.Models
 
                     connection.Open();
                     SqlCommand selectCommand = connection.CreateCommand();
-                    selectCommand.CommandText = "DELETE dbo.TabUser WHERE UserName = '" + username + "'";
+                    selectCommand.CommandText = "DELETE dbo.TabUser WHERE UID = '" + UID + "'";
                     selectCommand.ExecuteReader();
                     return true;
                 }
