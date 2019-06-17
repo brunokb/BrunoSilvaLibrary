@@ -188,5 +188,76 @@ namespace BrunoSilvaLibrary.Models.Extended
                 return false;
             }
         }
+        public bool MediaBorrow(int MID, int UID, DateTime bDate, DateTime rDate, int lateFee)
+        {
+            string conString = "Data Source = SQL5020.site4now.net; Initial Catalog = DB_9AB8B7_B19ES6931; User ID = DB_9AB8B7_B19ES6931_admin; Password=z9jjQg9H";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+
+                    connection.Open();
+                    SqlCommand selectCommand = connection.CreateCommand();
+                    selectCommand.CommandText = "INSERT INTO TabBorrow(UID, MediaID, BorrowDate, ReturnDate, ActualReturnDate, LateFee) VALUES('" + UID + "', " + MID + ", '" + bDate + "', '" + rDate + "', '" + rDate + "', '" + lateFee + "')";
+                    selectCommand.ExecuteReader();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+        public bool MediaAvailable(int MID, DateTime bDate)
+        {
+            string conString = "Data Source = SQL5020.site4now.net; Initial Catalog = DB_9AB8B7_B19ES6931; User ID = DB_9AB8B7_B19ES6931_admin; Password=z9jjQg9H";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+
+                    connection.Open();
+                    SqlCommand selectCommand = connection.CreateCommand();
+                    selectCommand.CommandText = "SELECT * FROM TabBorrow WHERE MediaID =" + MID + " AND BorrowDate <= '"+bDate+"' AND ReturnDate >='"+bDate+"'";
+                    SqlDataReader mediaCheck = selectCommand.ExecuteReader();
+                    if (mediaCheck.HasRows)
+                    {
+                        return true;
+                    }
+                    else return false;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+        public bool MediaReserve(int MID, int UID, DateTime bDate)
+        {
+            string conString = "Data Source = SQL5020.site4now.net; Initial Catalog = DB_9AB8B7_B19ES6931; User ID = DB_9AB8B7_B19ES6931_admin; Password=z9jjQg9H";
+
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(conString))
+                {
+
+                    connection.Open();
+                    SqlCommand selectCommand = connection.CreateCommand();
+                    selectCommand.CommandText = "INSERT INTO TabBorrow(UID, MediaID, BorrowDate) VALUES('" + UID + "', " + MID + ", '" + bDate +"')";
+                    selectCommand.ExecuteReader();
+                    return true;
+                }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
+        }
+
     }
 }

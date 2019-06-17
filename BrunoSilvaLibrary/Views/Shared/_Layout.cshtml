@@ -22,7 +22,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Media", "Media", "Home")</li>
+                    <li>@Html.ActionLink("Media", "Media", "Media")</li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     @if (@HttpContext.Current.Session["UserLevel"] != null)
@@ -31,13 +31,13 @@
                         {
                             <li>@Html.ActionLink("User List", "UserList", "Home")</li>
                         }
-                        <li>@Html.ActionLink(@HttpContext.Current.Session["Username"].ToString(), "UserDashBoard", "Home")</li>
+                        <li>@Html.ActionLink(@HttpContext.Current.Session["Username"].ToString(), "UserDashBoard", "User")</li>
                         <li>@Html.ActionLink("Logout", "Logout", "Home")</li>
                     }
                     @if (@HttpContext.Current.Session["UserLevel"] == null)
                     {
-                        <li>@Html.ActionLink("Register", "Register", "Home")</li>
-                        <li>@Html.ActionLink("Login", "Login", "Home")</li>
+                        <li>@Html.ActionLink("Register", "Register", "User")</li>
+                        <li>@Html.ActionLink("Login", "Login", "User")</li>
                     }
                 </ul>
             </div>
