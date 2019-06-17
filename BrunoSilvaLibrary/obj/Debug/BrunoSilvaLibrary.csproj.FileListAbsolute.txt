@@ -1,3 +1,4 @@
+C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\obj\Debug\BrunoSilvaLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\bin\BrunoSilvaLibrary.dll.config
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\bin\BrunoSilvaLibrary.dll
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\bin\BrunoSilvaLibrary.pdb
@@ -69,8 +70,7 @@ C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\bin\System
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\bin\Newtonsoft.Json.xml
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\bin\Antlr3.Runtime.pdb
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\obj\Debug\BrunoSilvaLibrary.csprojAssemblyReference.cache
-C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\obj\Debug\BrunoSilvaLibrary.csproj.CoreCompileInputs.cache
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\obj\Debug\BrunoSilvaLibrary.csproj.CopyComplete
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\obj\Debug\BrunoSilvaLibrary.dll
 C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\obj\Debug\BrunoSilvaLibrary.pdb
+C:\Users\Bruno Silva\source\repos\BrunoSilvaLibrary\BrunoSilvaLibrary\obj\Debug\BrunoSilvaLibrary.csprojAssemblyReference.cache

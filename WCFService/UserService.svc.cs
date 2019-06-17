@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrunoSilvaLibrary.Models.Extended;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -14,10 +15,13 @@ namespace BrunoSilvaLibrary
         public void DoWork()
         {
         }
-        public int userReturn()
-        {
-            return 1;
-        }
 
+        List<Media> IUserService.UserReturn(string title, string genre, string director)
+        {
+            List <Media> md = new List <Media>();
+            MediaDataImp mdImp = new MediaDataImp();
+            md = mdImp.GetMedias(title, genre,director);
+            return md;
+        }
     }
 }

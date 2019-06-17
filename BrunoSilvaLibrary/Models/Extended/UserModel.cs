@@ -13,7 +13,6 @@ namespace BrunoSilvaLibrary.Models
         public string Password { get; set; }
         public int UserLevel { get; set; }
         public string UserEmail { get; set; }
-        public string ConfirmPassword { get; set; }
 
     }
 }
