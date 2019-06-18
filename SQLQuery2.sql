@@ -1,1 +1,1 @@
-﻿INSERT INTO TabMedia (Title,Genre,Director,Language,PublishYear,Budget) VALUES ('Avengers: Infinity War',4,'7','1','2018','5000')
+﻿SELECT * FROM TabBorrow WHERE MediaID =1 AND BorrowDate <= '6/17/2019 2:03:12 PM' AND ReturnDate >='6/17/2019 2:03:12 PM'

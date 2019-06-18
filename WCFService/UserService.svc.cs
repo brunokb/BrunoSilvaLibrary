@@ -1,4 +1,4 @@
-﻿using BrunoSilvaLibrary.Models.Extended;
+﻿using BrunoSilvaLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,16 +12,12 @@ namespace BrunoSilvaLibrary
     // NOTE: In order to launch WCF Test Client for testing this service, please select UserService.svc or UserService.svc.cs at the Solution Explorer and start debugging.
     public class UserService : IUserService
     {
-        public void DoWork()
+        List<UserModel> IUserService.UserReturn()
         {
-        }
-
-        List<Media> IUserService.UserReturn(string title, string genre, string director)
-        {
-            List <Media> md = new List <Media>();
-            MediaDataImp mdImp = new MediaDataImp();
-            md = mdImp.GetMedias(title, genre,director);
-            return md;
+            List <UserModel> umd = new List <UserModel>();
+            UserDataImp usrImp = new UserDataImp();
+            umd = usrImp.GetUserList();
+            return umd;
         }
     }
 }

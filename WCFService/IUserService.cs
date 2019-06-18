@@ -1,4 +1,4 @@
-﻿using BrunoSilvaLibrary.Models.Extended;
+﻿using BrunoSilvaLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +13,7 @@ namespace BrunoSilvaLibrary
     public interface IUserService
     {
         [OperationContract]
-        void DoWork();
-        [OperationContract]
-        List<Media> UserReturn(string title, string genre, string director);
+        List<UserModel> UserReturn();
 
     }
 }
